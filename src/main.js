@@ -8,6 +8,9 @@ import VueFluent from "vfluentdesign";
 import "vfluentdesign/lib/index.css";
 import "@/style/global.scss";
 
+import api from './api';
+Vue.use(api);
+
 Vue.use(VueFluent);
 
 Vue.config.productionTip = false
