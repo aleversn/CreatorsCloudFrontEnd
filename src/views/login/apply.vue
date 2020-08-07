@@ -15,7 +15,7 @@
 		<div class="main-block">
 			<div class="s1">
 				<fv-text-box
-					v-model="Form.UserName"
+					v-model="Form.Phone"
 					placeholder="手机号 (+86)"
 					borderWidth="2"
 					:revealBorder="true"
@@ -160,7 +160,7 @@ export default {
 	data: function () {
 		return {
 			Form: {
-				UserName: "",
+				Phone: "",
 				Email: "",
 				Password: "",
 				VerifyCode: "",
@@ -172,7 +172,7 @@ export default {
 	},
 	methods: {
 		verifyInput() {
-			if (this.Form.UserName == "") {
+			if (this.Form.Phone == "") {
 				this.$barWarning("手机号不能为空", {
 					status: "warning",
 				});
@@ -201,12 +201,10 @@ export default {
 			if (this.Apply.Lock) return;
 			this.Apply.Lock = true;
 			let form = this.Form;
-			this.$api(
-				form.UserName,
-				form.Password,
-				null,
-				form.Email,
-				null
+			this.$api.Auth.Register(
+                form.Email,
+				form.Phone,
+				form.Password
 			)
 				.then(() => {
 					this.$barWarning("注册成功", {
