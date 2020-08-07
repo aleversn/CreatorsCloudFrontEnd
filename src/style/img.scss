@@ -1,0 +1,8 @@
+@mixin avatar($r: 50px)
+{
+    width: $r;
+    height: $r;
+    border-radius: 50%;
+    object-fit: cover;
+    user-select: none;
+}

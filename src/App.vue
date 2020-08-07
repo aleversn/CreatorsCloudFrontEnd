@@ -7,12 +7,19 @@
 <script>
 export default {
 	name: "App",
-	components: {},
+    components: {}
 };
 </script>
 
 <style lang="scss">
-#app {
-	
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Century";
+    src: url("./assets/fonts/GOTHIC.TTF");
 }
 </style>

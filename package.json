@@ -12,6 +12,7 @@
     "axios-swagger-helper": "^0.0.37",
     "core-js": "^3.6.5",
     "node-sass": "^4.14.1",
+    "office-ui-fabric-core": "^11.0.0",
     "sass-loader": "^8.0.2",
     "vfluentdesign": "^0.0.48",
     "vue": "^2.6.11",
