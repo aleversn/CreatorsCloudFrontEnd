@@ -17,6 +17,7 @@ Vue.use(acrylic);
 
 Vue.use(VueFluent);
 
+
 Vue.config.productionTip = false
 
 new Vue({
