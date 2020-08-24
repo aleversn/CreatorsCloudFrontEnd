@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import tool from "./tools";
 
 import login from './login';
+import manage from './manage';
 
 Vue.use(VueRouter);
 
@@ -15,7 +16,8 @@ const routes = [
         name: "Home",
         component: () => AsyncLoad(import("@/views/home"))
     },
-    login
+    login,
+    manage
 ];
 
 const router = new VueRouter({

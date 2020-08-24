@@ -1,16 +1,15 @@
 <template>
 <div>
-    Creators Cloud
-    <profile-menu></profile-menu>
+    <banner></banner>
 </div>
 </template>
 
 <script>
-import profileMenu from '@/components/home/profileMenu.vue';
+import banner from '@/components/general/banner.vue';
 
 export default {
     components: {
-        profileMenu
+        banner
     },
     mounted () {
         

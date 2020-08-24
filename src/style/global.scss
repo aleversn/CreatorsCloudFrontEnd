@@ -16,6 +16,14 @@
     width: 100%;
     height: 100%;
 }
+@mixin W100() {
+    position: relative;
+    width: 100%;
+}
+@mixin H100() {
+    position: relative;
+    height: 100%;
+}
 @mixin FlexC() {
     display: flex;
     flex-direction: column;

@@ -11,8 +11,10 @@ import "@/style/global.scss";
 import {BrowserVersion} from "@/js/browserVersion.js";
 
 import api from './api';
+import VerifyForm from './js/formVerify.js';
 import acrylic from './js/dynamicStyle/acrylic.js';
 Vue.use(api);
+Vue.use(VerifyForm);
 Vue.use(acrylic);
 
 Vue.use(VueFluent);

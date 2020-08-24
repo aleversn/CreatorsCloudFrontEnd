@@ -22,7 +22,7 @@
 					border-color="transparent"
 					focusBorderColor="transparent"
 					background="whitesmoke"
-                    borderRadius="5"
+					borderRadius="5"
 					style="width: 90%; min-height: 50px; margin-top: 45px;"
 					@keyup="handleEnter"
 				></fv-text-box>
@@ -34,7 +34,7 @@
 					border-color="transparent"
 					focusBorderColor="transparent"
 					background="whitesmoke"
-                    borderRadius="5"
+					borderRadius="5"
 					style="width: 90%; min-height: 50px; margin-top: 15px;"
 					@keyup="handleEnter"
 				></fv-text-box>
@@ -47,7 +47,7 @@
 					border-color="transparent"
 					focusBorderColor="transparent"
 					background="whitesmoke"
-                    borderRadius="5"
+					borderRadius="5"
 					style="width: 90%; min-height: 50px; margin-top: 15px;"
 					@keyup="handleEnter"
 				></fv-text-box>
@@ -155,9 +155,11 @@
 </style>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-	name: "SASApply",
-	data: function () {
+	name: "CCApply",
+	data() {
 		return {
 			Form: {
 				Phone: "",
@@ -169,6 +171,21 @@ export default {
 				Lock: false,
 			},
 		};
+	},
+	watch: {
+		netWorkStatus(val) {
+			if (!val) {
+				this.Apply.Lock = false;
+				this.$barWarning("服务器响应失败", {
+					status: "error",
+				});
+			}
+		},
+	},
+	computed: {
+		...mapState({
+			netWorkStatus: (state) => state.netWorkStatus,
+		}),
 	},
 	methods: {
 		verifyInput() {
@@ -186,15 +203,15 @@ export default {
 					status: "warning",
 				});
 				return false;
-			} else if (this.Form.Password.match(
-                /^[A-Za-z0-9_@.,]{8,18}$/g
-            ) == null) {
+			} else if (
+				this.Form.Password.match(/^[A-Za-z0-9_@.,]{8,18}$/g) == null
+			) {
 				this.$barWarning("密码格式有误", {
 					status: "warning",
 				});
 				return false;
-            }
-            
+			}
+
 			return true;
 		},
 		async handleApply() {
@@ -202,11 +219,7 @@ export default {
 			if (this.Apply.Lock) return;
 			this.Apply.Lock = true;
 			let form = this.Form;
-			this.$api.Auth.Register(
-                form.Email,
-				form.Phone,
-				form.Password
-			)
+			this.$api.Auth.Register(form.Email, form.Phone, form.Password)
 				.then(() => {
 					this.$barWarning("注册成功", {
 						status: "correct",
@@ -215,13 +228,8 @@ export default {
 					this.$Go("/login");
 				})
 				.catch((result) => {
-					if (result.data) {
-						result = result.data;
-					}
-					let msg =
-						result.errors != null
-							? result.errors[0].message
-							: result.title;
+					let msg = "Unknown";
+					if (result.message) msg = result.message;
 					this.$barWarning(`注册失败: 原因: ${msg}`, {
 						status: "warning",
 					});
@@ -229,8 +237,9 @@ export default {
 				});
 		},
 		handleEnter(event) {
+			if (this.Apply.Lock) return false;
 			if (event.keyCode == 13) this.handleApply();
-		}
+		},
 	},
 };
 </script>
