@@ -1,0 +1,178 @@
+@import './img.scss';
+@import 'office-ui-fabric-core/src/sass/_References.scss';
+
+@mixin bg_255($opacity) {
+    background: rgba(255, 255, 255, $opacity);
+}
+
+@mixin bg_245($opacity) {
+    background: rgba(245, 245, 245, $opacity);
+}
+
+@mixin bg_239($opacity) {
+    background: rgba(239, 239, 239, $opacity);
+}
+
+@mixin bg_50($opacity) {
+    background: rgba(50, 49, 48, $opacity);
+}
+
+@mixin bg_36($opacity) {
+    background: rgba(36, 36, 36, $opacity);
+}
+
+@mixin bg_0($opacity) {
+    background: rgba(0, 0, 0, $opacity);
+}
+
+@mixin color_255($opacity) {
+    color: rgba(255, 255, 255, $opacity);
+}
+
+@mixin color_245($opacity) {
+    color: rgba(245, 245, 245, $opacity);
+}
+
+@mixin color_239($opacity) {
+    color: rgba(239, 239, 239, $opacity);
+}
+
+@mixin color_50($opacity) {
+    color: rgba(50, 49, 48, $opacity);
+}
+
+@mixin color_36($opacity) {
+    color: rgba(36, 36, 36, $opacity);
+}
+
+@mixin color_0($opacity) {
+    color: rgba(0, 0, 0, $opacity);
+}
+
+@mixin cc-color($color) {
+    background-image: $color;
+    background-clip: text;
+    -webkit-background-image: $color;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin color-gray
+{
+    color: #8189a9;
+}
+
+@mixin color-cc
+{
+    @include cc-color(linear-gradient(to right, #495D80, #9F3A8C));
+}
+
+@mixin color-black-gray
+{
+    @include cc-color(linear-gradient(to right, #000000, #434343));
+}
+
+@mixin color-black-red
+{
+    @include cc-color(linear-gradient(to left, #c31432, #240b36));
+}
+
+@mixin color-orange-pink
+{
+    @include cc-color(linear-gradient(45deg, #ffba1c, #ff2c64));
+}
+
+@mixin pink-a
+{
+    @include cc-color(linear-gradient(to right, #da4453, #89216b));
+}
+
+@mixin pink-b
+{
+    @include cc-color(linear-gradient(to right, #ec008c, #fc6767));
+}
+
+@mixin white-a
+{
+    @include cc-color(linear-gradient(to bottom, #ada996, #f2f2f2, #dbdbdb, #eaeaea));
+}
+
+@mixin white-b
+{
+    @include cc-color(linear-gradient(to left, #8e9eab, #eef2f3));
+}
+
+@mixin item-row($padding)
+{
+    @include Vcenter;
+    
+    position: relative;
+    width: 100%;
+    height: 50px;
+    padding: 0px $padding;
+}
+
+@mixin naive-button
+{
+    @include HcenterVcenter;
+    @include color_36(1);
+    
+    position: relative;
+    width: 50px;
+    height: 50px;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover
+    {
+        @include bg_0(0.1);
+    }
+
+    &.dark
+    {
+        @include color_245(1);
+
+        &:hover
+        {
+            @include bg_255(0.1);
+        }
+    }
+}
+
+@mixin hover-decoration
+{
+    &:hover
+    {
+        color: rgba(0, 153, 204, 1);
+        text-decoration: underline;
+    }
+}
+
+@mixin label($color: rgba(0, 153, 204, 1))
+{
+    font-size: 13.8px;
+    color: $color;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover
+    {
+        text-decoration: underline;
+    }
+}
+
+@mixin a-link
+{
+    @include nowrap;
+    
+    font-size: 13.8px;
+    color: #8189a9;
+    user-select: none;
+    cursor: pointer;
+    
+    &:hover
+    {
+        color: #a6adc9;
+    }
+}
