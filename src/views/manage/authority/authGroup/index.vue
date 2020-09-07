@@ -36,8 +36,8 @@
             </template>            
             <template v-slot:column_6="x">
                 <div class="buttonGroup">
-                    <fv-button  theme="light" @click="editItem(x)">编辑</fv-button>
-                    <fv-button  theme="custom" @click="deleteItem(x)">删除</fv-button>
+                    <fv-button  theme="light" @click="editItem(x)" v-permission="'/authGroup/edit'">编辑</fv-button>
+                    <fv-button  theme="custom" @click="deleteItem(x)"  v-permission="'/authGroup/delete'">删除</fv-button>
                 </div>
             </template>
         </fv-details-list>
@@ -89,6 +89,7 @@ export default {
                 name: "",
                 summary: "",
                 mpids: [],
+                IsChangeMpids:false
             },          
             //分类菜单列表
             categoryMenuList: [],
@@ -132,12 +133,12 @@ export default {
                 {
                     content: "创建时间",
                     minWidth: 100,
-                    width: 150,
+                    width: 200,
                 },
                             {
                     content: "更新时间",
                     minWidth: 100,
-                    width: 150,
+                    width: 200,
                 },
                 {
                     content: "相关操作",
@@ -244,19 +245,25 @@ export default {
                 if(!valid){
                     this.$message.warning("参数校验出错,请按照提示天写")
                 }else{
+                    var param={}
                     var categoryMenuUids = this.$refs.tree.getCheckedKeys();
                     // 得到的半选UID(也就是父级菜单)
                     var halfCategoryMenuUids = this.$refs.tree.getHalfCheckedKeys();
                     // 合并
-                    categoryMenuUids = categoryMenuUids.concat(halfCategoryMenuUids);
-                    console.log("合并后的", categoryMenuUids)
-                    var param={}
+                    categoryMenuUids = categoryMenuUids.concat(halfCategoryMenuUids).join(',');
+                    // console.log("合并后的", categoryMenuUids)
                     param.name=this.form.name
                     param.summary=this.form.summary
-                    param.mpids=categoryMenuUids.join(',')
+                    param.mpids=categoryMenuUids
                     
                     if(this.isEdit){
                         //如果是编辑类型
+                        if(categoryMenuUids==this.form.mpids){
+                            //如果改变了权限
+                            param.changePermission=false;
+                        }else{
+                            param.changePermission=true;
+                        }                        
                         param.uid=this.form.uid
                         edit(param).then(res=>{
                             if(res.code=="success"){
@@ -280,7 +287,6 @@ export default {
                             this.dialogFormVisible=!this.dialogFormVisible
                             this.form=this.getFormObject()   
                         })
-
                     }
                 }
             })

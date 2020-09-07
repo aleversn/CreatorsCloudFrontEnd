@@ -41,8 +41,8 @@
             </template>          
             <template v-slot:column_6="x">
                 <div class="buttonGroup">
-                    <fv-button  theme="light" @click="editItem(x)">编辑</fv-button>
-                    <fv-button  theme="custom" @click="deleteItem(x)">删除</fv-button>
+                    <fv-button  theme="light" @click="editItem(x)" v-permission="'/button/edit'">编辑</fv-button>
+                    <fv-button  theme="custom" @click="deleteItem(x)" v-permission="'/button/delete'">删除</fv-button>
                 </div>
             </template>
             

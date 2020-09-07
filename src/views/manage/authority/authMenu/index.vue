@@ -41,8 +41,8 @@
             </template>          
             <template v-slot:column_6="x">
                 <div class="buttonGroup">
-                    <fv-button  theme="light" @click="editItem(x)">编辑</fv-button>
-                    <fv-button  theme="custom" @click="deleteItem(x)">删除</fv-button>
+                    <fv-button  theme="light" @click="editItem(x)" v-permission="'/menu/edit'">编辑</fv-button>
+                    <fv-button  theme="custom" @click="deleteItem(x)" v-permission="'/menu/delete'">删除</fv-button>
                 </div>
             </template>
             
@@ -128,6 +128,7 @@ export default {
                 parentUid:"",
                 menuLevel:"",
                 menuType:0,
+                status:1,
                 name: "",
                 icon: "",
                 url: "",
@@ -313,7 +314,6 @@ export default {
                     this.$message.warning("参数校验出错,请按照提示天写")
                 }else{
                     var param=this.form
-                    console.log(param)
                     if(this.isEdit){
                         //如果是编辑类型
                         editMenu(param).then(res=>{
@@ -351,7 +351,8 @@ export default {
                 uid: null,
                 parentUid:"",
                 menuLevel:"",
-                menuType:1,
+                menuType:0,
+                status:1,
                 name: "",
                 icon: "",
                 url: "",

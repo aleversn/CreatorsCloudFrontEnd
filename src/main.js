@@ -3,10 +3,14 @@ import App from './App.vue'
 
 import router from "@/router";
 import store from "@/store";
+
+//后面改成全局dns加速
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-
+//自定义指令
+import './directive'
+//vue-router控制页面跳转权限
 
 import VueFluent from "vfluentdesign";
 

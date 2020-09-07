@@ -27,14 +27,19 @@ export default {
             component: () => AsyncLoad(import("@/views/manage/authority/authMenu"))
         },
         {
-            path: "user",
-            name: "User",
-            component: () => AsyncLoad(import("@/views/manage/user"))
+            path:'/authority/user',
+            name:"authUser",
+            component: () => AsyncLoad(import("@/views/manage/authority/authUser"))
         },
-        {
-            path: "group",
-            name: "Group",
-            component: () => AsyncLoad(import("@/views/manage/group"))
-        }
+        // {
+        //     path: "user",
+        //     name: "User",
+        //     component: () => AsyncLoad(import("@/views/manage/user"))
+        // },
+        // {
+        //     path: "group",
+        //     name: "Group",
+        //     component: () => AsyncLoad(import("@/views/manage/group"))
+        // }
     ]
 };
