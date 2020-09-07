@@ -11,6 +11,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 //自定义指令
 import './directive'
 //vue-router控制页面跳转权限
+import './permission'
 
 import VueFluent from "vfluentdesign";
 

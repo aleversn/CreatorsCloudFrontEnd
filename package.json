@@ -16,6 +16,7 @@
     "js-cookie": "^2.2.1",
     "js-cookies": "^1.0.4",
     "node-sass": "^4.14.1",
+    "nprogress": "^0.2.0",
     "office-ui-fabric-core": "^11.0.0",
     "sass-loader": "^8.0.2",
     "vfluentdesign": "^0.0.50",

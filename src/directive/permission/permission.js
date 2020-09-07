@@ -35,7 +35,6 @@ export default {
           console.log("用户不具有权限:"+path)
           el.parentNode && el.parentNode.removeChild(el)
         }else{
-          console.log("用户具有权限:"+path)
         }
       } else {
         throw new Error(`need roles! Like v-permission="'admin'"`)
