@@ -24,7 +24,8 @@ export const constantRouterMap = [
     { path: '/404', component: () => AsyncLoad(import('@/views/404')), hidden: true },
     { path: '/401', component: () => AsyncLoad(import('@/views/401')), hidden: true },
     login,
-    manage
+    manage,
+    
 ];
 
 const router = new VueRouter({

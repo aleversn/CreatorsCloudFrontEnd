@@ -24,6 +24,10 @@ import {BrowserVersion} from "@/js/browserVersion.js";
 import api from './api';
 import VerifyForm from './js/formVerify.js';
 import acrylic from './js/dynamicStyle/acrylic.js';
+
+import uploader from 'vue-simple-uploader'
+Vue.use(uploader)
+
 Vue.use(api);
 Vue.use(VerifyForm);
 Vue.use(acrylic);

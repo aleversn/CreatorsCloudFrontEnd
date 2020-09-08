@@ -31,6 +31,11 @@ export default {
             name:"authUser",
             component: () => AsyncLoad(import("@/views/manage/authority/authUser"))
         },
+        {
+            path:'/trainSet/mySet',
+            name:"mySet",
+            component: () => AsyncLoad(import("@/views/manage/trainset"))
+        },
         // {
         //     path: "user",
         //     name: "User",
