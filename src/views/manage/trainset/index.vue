@@ -1,7 +1,7 @@
 <template>
   <div class="authGroup">
     <div class="row">
-        <h1 class="main-title">权限管理</h1>
+        <h1 class="main-title">文件管理</h1>
     </div>
     <!-- 工具栏 -->
     <div class="row command-bar">
@@ -25,24 +25,24 @@
                 <p class="sec">{{x.row_index + 1}}</p>
             </template>
             <template v-slot:column_1="x">
-                <p>{{x.item.name}}</p>
+                <p>{{x.item.fileName}}</p>
             </template>
             <template v-slot:column_2="x">
-                <p>{{x.item.fatherName}}</p>
+                <p>{{x.item.fileSize}}</p>
             </template>            
             <template v-slot:column_3="x">
-                <p class="sec">{{x.item.url}}</p>
+                <p class="sec">{{x.item.chunkSize}}</p>
             </template>
             <template v-slot:column_4="x">
-                <p class="sec">{{x.item.icon}}</p>
+                <p class="sec">{{x.item.url}}</p>
             </template>
             <template v-slot:column_5="x">
-                <p class="sec">{{x.item.sort}}</p>
+                <p class="sec">{{x.item.createTime}}</p>
             </template>          
             <template v-slot:column_6="x">
                 <div class="buttonGroup">
-                    <fv-button  theme="light" @click="editItem(x)" v-permission="'/button/edit'">编辑</fv-button>
-                    <fv-button  theme="custom" @click="deleteItem(x)" v-permission="'/button/delete'">删除</fv-button>
+                   
+                    <fv-button  theme="custom" @click="deleteItem(x)" >删除</fv-button>
                 </div>
             </template>
             
@@ -59,30 +59,14 @@
 </template>
 
 <script>
-import {getButtonAll,addButton,editButton,deleteButton} from '@/api/button.js'
-
+import {getFileList,deleteFile} from '@/api/file.js'
+import {getToken,getUserUid} from '@/utils/auth'
 export default {
     data(){
-        return{
-            form: {
-                uid: null,
-                parentUid:"",
-                menuLevel:"3",
-                menuType:1,
-                name: "",
-                icon: "",
-                url: "",
-                sort: ""
-            },        
-            //分类菜单列表
-            categoryMenuList: [],
-            parentUids:[],
+        return{        
+
             dialogFormVisible:false,
             formLabelWidth: "120px",
-            defaultProps: {
-                children: "childMenu",
-                label: "name"
-            },
             tableData: [],
             tableGroup:[],
             keyword: "",
@@ -105,17 +89,17 @@ export default {
                     width: 150,
                 },
                 {
-                    content: "描述",
+                    content: "大小",
                     minWidth: 100,
                     width: 150,
                 },        
                 {
-                    content: "大小",
+                    content: "分片数",
                     minWidth: 100,
                     width: 150,
                 },
                {
-                    content: "排序",
+                    content: "访问地址",
                     minWidth: 100,
                     width: 150,
                 },
@@ -132,7 +116,7 @@ export default {
             ],
             cmd: [
                 { name: "刷新", icon: "Refresh", iconColor: "rgba(0, 153, 204, 1)", func: () => { this.getItemLists() } },
-                { name: "增加", icon: "Add", iconColor: "rgba(0, 153, 204, 1)", func: () => { this.addItem() }},
+                 { name: "增加", icon: "Add", iconColor: "rgba(0, 153, 204, 1)", func: () => { this.addItem() }},
                 { name: "显示范围", icon: "Filter", iconColor: "rgba(0, 153, 204, 1)", secondary: [
                     { name: "10", icon: "LineSpacing", func: () => { this.filterLength = 10 } },
                     { name: "50", icon: "LineSpacing", func: () => { this.filterLength = 50 } },
@@ -142,54 +126,33 @@ export default {
         }
     },
     created(){
-        //this.getItemLists()
+        this.getItemLists()
     },
     components:{
-       minioUpload:resolve=>require(['./upload'],resolve)
+       minioUpload:resolve=>require(['./upload1.vue'],resolve)
     },
     methods:{
-
+        addItem(){
+            this.title="上传训练集"
+            this.dialogFormVisible=!this.dialogFormVisible
+        },
         /**
          * 获取列表
          */
          getItemLists(){
             var param={}
+            param.userUid=getUserUid()
             param.currentPage=this.currentPage;
             param.pageSize=this.pageSize; 
-            getButtonAll(param).then(res=>{
-                console.log(res.data.records)
+            getFileList(param).then(res=>{
+                console.log(res.data)
                 var data=res.data
                 var records=data.records
                 this.currentPage=data.current
                 this.pageSize=data.size
                 this.total=data.total
-
-                var list=[]
-                this.parentUids=[]
-                records.forEach((item,index)=>{
-                    // 保留父类数组
-                    var parent={}
-                    parent.value=item.uid
-                    parent.label=item.name
-                    this.parentUids.push(parent)
-                    // 将子类放进tableDate
-                    item.childMenu.forEach((child,i)=>{
-                        child.fatherName=item.name
-                        list.push(child)
-                    })
-                    
-                })
-                this.tableData=list
-            })                  
-         },
-         /**
-          * 增加权限组
-          */
-         addItem(){
-             this.title="上传训练集"
-             this.dialogFormVisible=!this.dialogFormVisible
-            //  this.form=this.getFormObject()
-            // this.isEdit = false;
+                this.tableData=records
+            })                 
          },
          /**
           * 删除
@@ -204,72 +167,7 @@ export default {
                    this.$message.warning(res.data)
                }
            })
-         },
-         /**
-          * 编辑
-          */
-         editItem(x){
-             this.title="编辑按钮";
-             this.isEdit=true;
-             this.form=x.item
-             this.dialogFormVisible=!this.dialogFormVisible 
-         },
-         
-         /**
-          * 提交表单
-          */
-         submitForm(){
-            this.$refs.form.validate((valid) => {
-                if(!valid){
-                    this.$message.warning("参数校验出错,请按照提示天写")
-                }else{
-                    var param=this.form
-                    console.log(param)
-                    if(this.isEdit){
-                        //如果是编辑类型
-                        editButton(param).then(res=>{
-                            if(res.code=="success"){
-                                this.$message.success(res.data)
-                                this.getItemLists()
-                            }else{
-                                this.$message.warning(res.data)
-                            }
-                            this.dialogFormVisible=!this.dialogFormVisible
-                            this.form=this.getFormObject()
-                        })
-                    }else{
-                        //如果是提交类型
-                        addButton(param).then(res=>{
-                            if(res.code=="success"){
-                                this.$message.success(res.data)
-                                this.getItemLists()
-                            }else{
-                                this.$message.warning(res.data)
-                            }
-                            this.dialogFormVisible=!this.dialogFormVisible
-                            this.form=this.getFormObject()   
-                        })
-
-                    }
-                }
-            })
-         },
-         /**
-          * 初始化表单
-          */
-         getFormObject: function () {
-            var formObject = {
-                uid: null,
-                parentUid:"",
-                menuType:1,
-                menuLevel:"3",
-                name: "",
-                icon: "",
-                url: "",
-                sort: ""
-            };
-            return formObject;
-        },              
+         },            
     },
     watch: {
         /**

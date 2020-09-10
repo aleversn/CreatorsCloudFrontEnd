@@ -241,7 +241,7 @@
 <script>
 import { mapState } from "vuex";
 import { userLogin } from "../../api/login";
-import {setToken} from '../../utils/auth'
+import {setToken,setUserUid} from '../../utils/auth'
 export default {
 	name: "CCLogin",
 	data() {
@@ -287,6 +287,8 @@ export default {
 						status: "correct",
 					});
 					var token=res.data.token
+					var userUid=res.data.userUid
+					setUserUid(userUid)
 					setToken(token)
 					let return_url = this.$route.query.return_url
 						? this.$route.query.return_url

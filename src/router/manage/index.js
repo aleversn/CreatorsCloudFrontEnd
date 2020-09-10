@@ -34,7 +34,7 @@ export default {
         {
             path:'/trainSet/mySet',
             name:"mySet",
-            component: () => AsyncLoad(import("@/views/manage/trainset"))
+            component: () => AsyncLoad(import("@/views/manage/trainset/index.vue"))
         },
         // {
         //     path: "user",
