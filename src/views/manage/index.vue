@@ -27,14 +27,18 @@ export default {
         return {
             navList: [
                 { key: 0, name: "概览", icon: "WebComponents", url: "/manage" },
-                { key: 1, name: "用户和权限", type: "header" },
+                { key: 1, name: "用户", type: "header" },
                 { key: 2, name: "用户", icon: "Contact", url: "/manage/user" },
-                { key: 3, name: "组", icon: "Group", url: "/manage/group" }
+                { key: 3, name: "权限", type: "header" },
+                { key: 4, name: "权限组", icon: "Group", url: "/manage/permissionGroup" }
             ],
             navCurrent: {}
         }
     },
     watch: {
+        $route () {
+            this.correctNav(this.$route, {});
+        },
         navCurrent (to) {
             if(this.$route.fullPath != to.url)
                 this.$Go(to.url);

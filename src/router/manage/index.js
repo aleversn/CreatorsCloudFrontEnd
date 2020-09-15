@@ -17,9 +17,9 @@ export default {
             component: () => AsyncLoad(import("@/views/manage/user"))
         },
         {
-            path: "group",
+            path: "permissionGroup",
             name: "Group",
-            component: () => AsyncLoad(import("@/views/manage/group"))
+            component: () => AsyncLoad(import("@/views/manage/permissionGroup"))
         }
     ]
 };

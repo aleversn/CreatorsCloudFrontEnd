@@ -5,7 +5,7 @@ let ax = axios.create();
 
 // config here
 
-ax.defaults.baseURL = "http://frp.leavessoft.cn:50003/"
+ax.defaults.baseURL = "https://frp.leavessoft.cn:50003/"
 
 ax.interceptors.request.use(config =>
 {

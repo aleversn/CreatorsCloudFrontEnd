@@ -176,3 +176,89 @@
         color: #a6adc9;
     }
 }
+
+@mixin fabric-table
+{
+    position: relative;
+    width: calc(100% - 24px);
+    height: auto;
+    flex: 1;
+    margin: 8px 12px;
+    padding: 0px;
+    background: white;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+@mixin usual-form($padding: 20px) {
+    
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: $padding;
+    line-height: 2.5;
+    display: flex;
+    flex-direction: column;
+
+    h1
+    {
+        width: 100%;
+        border-bottom: rgba(0, 120, 212, 0.3) solid thin;
+        color: rgba(0, 120, 212, 1);
+    }
+
+    h2, h3
+    {
+        width: 100%;
+        border-bottom: rgba(50, 39, 38, 0.3) solid thin;
+        color: rgba(75, 75, 75, 1);
+    }
+
+    p
+    {
+        font-size: 13.8px;
+        color: rgba(75, 75, 75, 1);
+
+        &.star
+        {
+            font-weight: 600;
+        }
+    }
+
+    textarea
+    {
+        width: 100%;
+        height: 80px;
+        padding: 8px;
+        background: transparent;
+        border: rgba(0,0,0,0.1) solid 2px;
+        font-family: '微软雅黑';
+        resize: none;
+        outline: none;
+        box-sizing: border-box;
+        transition: all 0.3s;
+        box-shadow: $ms-depth-shadow-16;
+
+        &:hover
+        {
+            border: rgba(0,0,0,0.3) solid 2px;
+        }
+
+        &:focus
+        {
+            border: rgba(0,120,212,0.6) solid 2px;
+        }
+    }
+
+    div.row
+    {
+        position: relative;
+        width: 100%;
+        padding: 12px 0px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+    }
+}

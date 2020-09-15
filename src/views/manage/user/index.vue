@@ -6,39 +6,13 @@
     <div class="row command-bar">
         <fv-command-bar :options="cmd">
             <template v-slot:right-space>
-                <div style="width: auto; height: 100%; display: flex; justify-content: center; align-items: center;">
+                <div style="width: auto; height: 100%; margin-right: 5px; display: flex; justify-content: center; align-items: center;">
                     <fv-search-box v-model="searchValue" :options="searchResult" icon="Search" placeholder="搜索用户" :revealBorder="true" borderRadius="3" borderWidth="2"></fv-search-box>
                 </div>
             </template>
         </fv-command-bar>
     </div>
-    <div class="row main-table">
-        <fv-details-list v-model="usersList" :head="usersHead" :multiSelection="true" style="width: 100%; height: 100%;" @choose-items="currentChoosen = $event" @rightclick="contextMenuItem = $event">
-            <template v-slot:column_0="x">
-                <p class="sec">{{x.row_index + 1}}</p>
-            </template>
-            <template v-slot:column_1="x">
-                <p>{{x.item.nickname}}</p>
-            </template>
-            <template v-slot:column_2="x">
-                <p class="sec">{{x.item.uid}}</p>
-            </template>
-            <template v-slot:column_3="x">
-                <p class="sec">{{x.item.email}}</p>
-            </template>
-            <template v-slot:column_4="x">
-                <p class="sec">{{x.item.phone}}</p>
-            </template>
-            <template v-slot:menu>
-                <div>
-                    <span @click="show.addUser = true">
-                        <i class="ms-Icon ms-Icon--AddGroup" style="color: rgba(0, 153, 204, 1);"></i>
-                        <p>管理组</p>
-                    </span>
-                </div>
-            </template>
-        </fv-details-list>
-    </div>
+    <user-table v-model="usersList"></user-table>
 </div>
 </template>
 
@@ -94,7 +68,12 @@
 </style>
 
 <script>
+import userTable from '@/components/manage/user/table.vue';
+
 export default {
+    components: {
+        userTable
+    },
     props: {
 
     },
@@ -109,43 +88,10 @@ export default {
                     { name: "100", icon: "LineSpacing", func: () => { this.filterLength = 100 } }
                 ]}
             ],
-            usersHead: [
-                {
-                    content: "序号",
-                    minWidth: 60,
-                    width: 80
-                },
-                {
-                    content: "昵称",
-                    minWidth: 120,
-                    width: 150,
-                    sortName: "nickname"
-                },
-                {
-                    content: "Uid",
-                    minWidth: 120,
-                    width: 150,
-                    sortName: "uid"
-                },
-                {
-                    content: "Email",
-                    minWidth: 80,
-                    width: 150,
-                    sortName: "name"
-                },
-                {
-                    content: "手机号",
-                    minWidth: 120,
-                    width: 120,
-                    sortName: "phone"
-                }
-            ],
             filterLength: 100,
             searchValue: "",
             usersList: [],
-            currentChoosen: [],
-            searchUsers: [],
-            contextMenuItem: {}
+            searchUsers: []
         }
     },
     watch: {
