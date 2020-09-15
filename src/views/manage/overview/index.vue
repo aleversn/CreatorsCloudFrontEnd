@@ -1,7 +1,5 @@
 <template>
-<div>
-    
-</div>
+  <div>大概描述</div>
 </template>
 
 <script>

@@ -83,7 +83,7 @@
 					fontWeight="600"
 					style="width: 90%; height: 50px; margin-top: 20px;"
 					:disabled="login.lock"
-					@click="submitLogin"
+					@click="handleLogin"
 				>继续</fv-button>
 				<div class="s2">
 					<p class="to-apply">忘记密码</p>
@@ -307,10 +307,8 @@ export default {
 			this.$api.Auth.Login(this.user.email, null, this.user.password)
 				.then((data) => {
 					if (data.code == 100000) {
-						localStorage.setItem(
-							"ApiToken",
-							["Bearer", data.data.token].join(" ")
-						);
+						setToken(data.data.token)
+						setUserUid(data.data.user.uid)
                         this.$store.commit("clearInfo");
                         let dataInfo = data.data.user;
                         dataInfo.userid = data.data.user.uid;
@@ -320,7 +318,7 @@ export default {
 						});
 						let return_url = this.$route.query.return_url
 							? this.$route.query.return_url
-							: "/";
+							: "/manage";
 						this.$Go(`${return_url}`);
 						this.login.lock = false;
 					}

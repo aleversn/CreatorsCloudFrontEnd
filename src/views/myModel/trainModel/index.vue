@@ -1,7 +1,5 @@
 <template>
-<div>
-    
-</div>
+    <div>训练模型页面</div>
 </template>
 
 <script>

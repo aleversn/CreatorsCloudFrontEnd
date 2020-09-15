@@ -32,12 +32,7 @@ export default {
     data () {
         return {
             navList: [
-                { key: 0, name: "概览", icon: "WebComponents", url: "/manage" },
-                { key: 1, name: "用户和权限", type: "header" },
-                { key: 2, name: "用户", icon: "Contact", url: "/manage/user" },
-                { key: 3, name: "组", icon: "Group", url: "/manage/group" },
-                { key: 1, name: "测试", type: "header" },
-                { key: 1, name: "ss", icon: "Group", url: "/auth/info" }
+                { key: "", name: "", icon: "", url: "" },
             ],
             navCurrent: {}
         }

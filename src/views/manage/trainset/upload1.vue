@@ -63,7 +63,7 @@ export default {
 
   .uploader-example .uploader-list {
     max-height: 440px;
-    height: 500px;
+    height: 300px;
     overflow: auto;
     overflow-x: hidden;
     overflow-y: auto;

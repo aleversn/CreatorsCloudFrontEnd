@@ -158,8 +158,8 @@ export default {
           * 删除
           */
          deleteItem(x){
-           var param={uid:x.item.uid}
-           deleteButton(param).then(res=>{
+           var param={uid:x.item.uid,userUid:getUserUid()}
+           deleteFile(param).then(res=>{
                if(res.code=="success"){
                    this.getItemLists()
                    this.$message.success("删除成功")

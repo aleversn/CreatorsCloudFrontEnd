@@ -36,15 +36,20 @@ export default {
             name:"mySet",
             component: () => AsyncLoad(import("@/views/manage/trainset/index.vue"))
         },
-        // {
-        //     path: "user",
-        //     name: "User",
-        //     component: () => AsyncLoad(import("@/views/manage/user"))
-        // },
-        // {
-        //     path: "group",
-        //     name: "Group",
-        //     component: () => AsyncLoad(import("@/views/manage/group"))
-        // }
+        {
+            path:'/model/proxy',
+            name:"proxy",
+            component: () => AsyncLoad(import("@/views/myModel/proxy"))
+        },
+        {
+            path:'/model/train',
+            name:"trainModel",
+            component: () => AsyncLoad(import("@/views/myModel/trainModel"))
+        },
+        {
+            path:'/model/manage',
+            name:"manageModel",
+            component: () => AsyncLoad(import("@/views/myModel/manageModel"))
+        },
     ]
 };
