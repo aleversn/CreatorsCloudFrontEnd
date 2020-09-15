@@ -21,7 +21,7 @@
     "office-ui-fabric-core": "^11.0.0",
     "sass-loader": "^8.0.2",
     "spark-md5": "^3.0.1",
-    "vfluentdesign": "^0.0.50",
+    "vfluentdesign": "^0.0.67",
     "vue": "^2.6.11",
     "vue-router": "^3.4.0",
     "vue-simple-uploader": "^0.7.4",
