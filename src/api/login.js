@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 //待改成process.env.ADMIN_API
-var ADMIN_API='http://localhost:8010' ;
+var ADMIN_API='http://124.70.200.174:8010' ;
 let config = {
     headers: {
       "Content-Type": "multipart/form-data",

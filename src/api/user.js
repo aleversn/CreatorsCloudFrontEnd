@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-var ADMIN_API='http://localhost:8010' ;
+var ADMIN_API='http://124.70.200.174:8010' ;
 
 export function getUserList(params) {
   return request({

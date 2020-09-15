@@ -83,7 +83,7 @@
 					fontWeight="600"
 					style="width: 90%; height: 50px; margin-top: 20px;"
 					:disabled="login.lock"
-					@click="handleLogin"
+					@click="submitLogin"
 				>继续</fv-button>
 				<div class="s2">
 					<p class="to-apply">忘记密码</p>

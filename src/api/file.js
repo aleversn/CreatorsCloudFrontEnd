@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-var FILE_API='http://localhost:8017' ;
+var FILE_API='http://124.70.200.174:8017' ;
 
 
 export function getFileList(params) {
